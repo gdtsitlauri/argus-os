@@ -1,0 +1,28 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# C Compiled Binaries
+src/c/argus_ipc
+
+# Rust
+target/
+
+# LaTeX Build Files
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# OS generated files
+.DS_Store
+.vscode/
+
+# pytest
+.pytest_cache/
+
+# Claude Code
+.claude/
