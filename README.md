@@ -2,6 +2,10 @@
 ### Game-Theoretic Distributed Microkernel for Edge AI
 
 **Author:** George David Tsitlauri  
+**Affiliation:** Dept. of Informatics & Telecommunications, University of Thessaly, Greece  
+**Contact:** gdtsitlauri@gmail.com  
+**Year:** 2026
+
 **Hardware Target:** NVIDIA GTX 1650 (4 GB VRAM) / WSL2  
 **Language Stack:** Python · C11 · Rust (bare-metal)
 
@@ -194,3 +198,15 @@ See `paper/argus_paper.tex` for full proofs.
 ## License
 
 MIT © 2026 George David Tsitlauri
+
+## Citation
+
+```bibtex
+@misc{tsitlauri2026argus,
+  author = {George David Tsitlauri},
+  title  = {ARGUS: A Game-Theoretic Distributed Microkernel for Edge AI},
+  year   = {2026},
+  institution = {University of Thessaly},
+  email  = {gdtsitlauri@gmail.com}
+}
+```
