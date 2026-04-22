@@ -1,10 +1,6 @@
 # ARGUS: Autonomous Resource Graph Unified Scheduler
 ### Game-Theoretic Distributed Microkernel for Edge AI
 
-**Author:** George David Tsitlauri  
-**Affiliation:** Dept. of Informatics & Telecommunications, University of Thessaly, Greece  
-**Contact:** gdtsitlauri@gmail.com  
-**Year:** 2026
 
 **Hardware Target:** NVIDIA GTX 1650 (4 GB VRAM) / WSL2  
 **Language Stack:** Python · C11 · Rust (bare-metal)
@@ -14,7 +10,46 @@ competing for CPU time; their Nash Equilibrium defines a provably fair,
 starvation-free allocation.  IPC is lock-free; GPU offloading is
 Nash-scheduled.
 
----
+
+## Project Metadata
+
+| Field | Value |
+| --- | --- |
+| Author | George David Tsitlauri |
+| Affiliation | Dept. of Informatics & Telecommunications, University of Thessaly, Greece |
+| Contact | gdtsitlauri@gmail.com |
+| Year | 2026 |
+
+## Interpretation Boundary
+
+ARGUS is strongest as a systems-research repository with:
+
+- real scheduler simulations,
+- real IPC benchmarks,
+- real distributed-clock artifacts,
+- and a bare-metal-oriented microkernel skeleton.
+
+The repository contains meaningful empirical evidence, but the more ambitious
+game-theoretic interpretation should be read as the motivating systems model,
+not as a full formal proof package equivalent to a specialized theory paper.
+
+## Result Snapshot
+
+Representative committed artifacts:
+
+- `results/scheduler/fairness_comparison.csv` shows ARGUS fairness rising from
+  `0.7027` to `0.99999` over 50 ticks while the Lyapunov proxy shrinks toward 0.
+- `results/latency/ipc_mpmc_benchmark.csv` and `results/latency/distributed_sync.csv`
+  provide the main throughput and causal-order evidence.
+- `results/scheduler/gpu_offload_results.csv` supports the GPU-sharing story.
+
+## Why ARGUS is stronger after calibration
+
+- It combines systems code, benchmark artifacts, tests, and a full paper.
+- The fairness and convergence artifacts are concrete and easy to inspect.
+- The repository is now framed as a serious systems-research platform with
+  strong empirical signals, rather than as a universal theorem-backed OS
+  replacement claim.
 
 ## Architecture
 
@@ -49,8 +84,6 @@ argus-os/
 └── paper/
     └── argus_paper.tex                   # Full ACM paper (SOSP/EuroSys target)
 ```
-
----
 
 ## Quick Start
 
@@ -97,8 +130,6 @@ Outputs: `results/latency/ipc_mpmc_benchmark.csv`
 ```bash
 python3 -m pytest tests/test_argus.py -v
 ```
-
----
 
 ## Experimental Results
 
@@ -149,8 +180,10 @@ Zero lock acquisitions; per-message Lamport timestamps for causal ordering.
 | 1024×1024      | GPU(sim) |  438     |   1.29   | **340×**  |
 | **Mean large** |          |          |          | **345×**  |
 
-*GPU latency computed from GTX 1650 FP32 peak (2.9 TFLOPS) model.  
-CPU latency measured on WSL2 numpy without AVX BLAS.*
+*GPU latency here is a modeled/simulated estimate derived from the GTX 1650 FP32
+peak path, while CPU latency is measured on the local WSL2 numpy stack. This
+table should therefore be read as a scheduler-oriented comparative artifact, not
+as a vendor-neutral production benchmark.*
 
 Nash Equilibrium shares GPU time among concurrent large tasks — no task
 is starved of GPU cycles regardless of urgency.
@@ -160,8 +193,6 @@ is starved of GPU cycles regardless of urgency.
 - **60 events** (3 processes × 10 messages each, send + receive)
 - **0 causality violations** (Lamport and Vector clock checks)
 - Final Lamport clocks: P₀=44, P₁=44, P₂=43
-
----
 
 ## Test Suite (pytest)
 
@@ -178,8 +209,6 @@ is starved of GPU cycles regardless of urgency.
 
 All 8 tests pass in ~26 seconds.
 
----
-
 ## Game Theory Background
 
 **Nash Equilibrium** (log utility):  
@@ -193,20 +222,4 @@ $$V(t) = \sum_i x_i(t)\log\frac{x_i(t)}{s_i} \xrightarrow{t\to\infty} 0$$
 
 See `paper/argus_paper.tex` for full proofs.
 
----
 
-## License
-
-MIT © 2026 George David Tsitlauri
-
-## Citation
-
-```bibtex
-@misc{tsitlauri2026argus,
-  author = {George David Tsitlauri},
-  title  = {ARGUS: A Game-Theoretic Distributed Microkernel for Edge AI},
-  year   = {2026},
-  institution = {University of Thessaly},
-  email  = {gdtsitlauri@gmail.com}
-}
-```
